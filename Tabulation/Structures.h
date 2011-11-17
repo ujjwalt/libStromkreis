@@ -13,7 +13,12 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-#ifdef __GNUC__
+#if defined (__clang__)
+#if __has_builtin(__builtin_expect)
+#define EXPECTED(cond) __builtin_expect(!!(cond), 1U)
+#define UNEXPECTED(cond) __builtin_expect(!!(cond), 0U)
+#endif
+#elif defined (__GNUC__)
 #define EXPECTED(cond) __builtin_expect(!!(cond), 1U)
 #define UNEXPECTED(cond) __builtin_expect(!!(cond), 0U)
 #else
