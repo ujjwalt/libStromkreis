@@ -12,19 +12,7 @@
 
 #include <stdio.h>
 #include <stdbool.h>
-
-#if defined (__clang__)
-#if __has_builtin(__builtin_expect)
-#define EXPECTED(cond) __builtin_expect(!!(cond), 1U)
-#define UNEXPECTED(cond) __builtin_expect(!!(cond), 0U)
-#endif
-#elif defined (__GNUC__)
-#define EXPECTED(cond) __builtin_expect(!!(cond), 1U)
-#define UNEXPECTED(cond) __builtin_expect(!!(cond), 0U)
-#else
-#define EXPECTED(cond) (cond)
-#define UNEXPECTED(cond) (cond)
-#endif
+#include "Global.h"
 
 typedef enum SOPOS {
     SOP,
